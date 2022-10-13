@@ -112,12 +112,12 @@ services:
       # volumes:
       # - "/host/path/to/config.json:/app/static/config.json"
     ports:
-      - "8080:80"
+      - "8080:8080"
     restart: unless-stopped
     
   certbot:
     image: certbot/certbot
-    container_name: certbot
+    container_name: cert
     volumes:
       - ./certs:/etc/letsencrypt/archive
       - ./www/:/var/www/html
