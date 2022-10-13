@@ -112,5 +112,15 @@ services:
       # volumes:
       # - "/host/path/to/config.json:/app/static/config.json"
     ports:
-      - "8080:8080"
+      - "8080:80"
     restart: unless-stopped
+    
+    certbot:
+    image: certbot/certbot
+    container_name: certbot
+    volumes:
+      - ./certs:/etc/letsencrypt/archive
+      - ./www/:/var/www/html
+    depends_on:
+      -  dtrack-frontend
+    command: certonly --webroot --webroot-path=/var/www/html --email fpederne@nttdata.com --agree-tos --no-eff-email --staging -d arlabnttdata.com
