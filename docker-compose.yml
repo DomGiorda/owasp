@@ -38,23 +38,6 @@ services:
       #   * The frontend container itself does NOT communicate with the API server directly, it just serves static files.
       #   * When deploying to dedicated servers, please use the external IP or domain of the API server.
       - API_BASE_URL=http://20.185.238.245:8081
-      # - "OIDC_ISSUER="
-      # - "OIDC_CLIENT_ID="
-      # - "OIDC_SCOPE="
-      # - "OIDC_FLOW="
-      # - "OIDC_LOGIN_BUTTON_TEXT="
-      # volumes:
-      # - "/host/path/to/config.json:/app/static/config.json"
     ports:
       - "8080:8080"
     restart: unless-stopped
-    
-  certbot:
-    image: certbot/certbot
-    container_name: cert
-    volumes:
-      - ./certs:/etc/letsencrypt/archive
-      - ./www/:/var/www/html
-    depends_on:
-      -  dtrack-frontend
-    command: certonly --webroot --webroot-path=/var/www/html --email fpederne@nttdata.com --agree-tos --no-eff-email --staging -d arlabnttdata.com
